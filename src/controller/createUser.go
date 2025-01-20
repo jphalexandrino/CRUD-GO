@@ -14,6 +14,7 @@ func CreateUser(c *gin.Context) {
 		restErr := rest_err.NewBedRequestError(
 			fmt.Sprintf("There are some incorrect filds, error=%s\n", err.Error()))
 		c.JSON(restErr.Code, restErr)
+		fmt.Printf("🔴 Erro na criação de usuário: " + err.Error() + "\n") // Only for debug
 		return
 	}
 
