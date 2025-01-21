@@ -48,15 +48,6 @@ func Error(message string, err error, tags ...zap.Field) {
 	}
 }
 
-func Debug(message string, err error, tags ...zap.Field) {
-	tags = append(tags, zap.NamedError("error", err))
-	log.Info(message, tags...)
-	err = log.Sync()
-	if err != nil {
-		return
-	}
-}
-
 func getOutPutLogs() string {
 	otput := strings.ToLower(strings.TrimSpace(os.Getenv(LogOutput)))
 	if otput == "" {
