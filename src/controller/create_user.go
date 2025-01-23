@@ -7,6 +7,7 @@ import (
 	"github.com/jphalexandrino/CRUD-GO/src/configuration/validation"
 	"github.com/jphalexandrino/CRUD-GO/src/controller/model/request"
 	"github.com/jphalexandrino/CRUD-GO/src/model"
+	service2 "github.com/jphalexandrino/CRUD-GO/src/model/service"
 	"go.uber.org/zap"
 	"net/http"
 )
@@ -34,7 +35,8 @@ func CreateUser(c *gin.Context) {
 		userRequest.Age,
 	)
 
-	if err := domain.CreateUser(); err != nil {
+	service := service2.NewUserDomainService()
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
