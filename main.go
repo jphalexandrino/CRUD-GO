@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/jphalexandrino/CRUD-GO/src/configuration/database/postgres"
 	"github.com/jphalexandrino/CRUD-GO/src/controller"
 	"github.com/jphalexandrino/CRUD-GO/src/controller/routes"
 	service2 "github.com/jphalexandrino/CRUD-GO/src/model/service"
@@ -13,6 +14,12 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
+	}
+
+	// Init DataBase
+	_, err = postgres.Init()
+	if err != nil {
+		return
 	}
 
 	//Init Dependencies
