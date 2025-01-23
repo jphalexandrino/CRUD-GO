@@ -7,7 +7,7 @@ import (
 	"github.com/jphalexandrino/CRUD-GO/src/configuration/validation"
 	"github.com/jphalexandrino/CRUD-GO/src/controller/model/request"
 	"github.com/jphalexandrino/CRUD-GO/src/model"
-	service2 "github.com/jphalexandrino/CRUD-GO/src/model/service"
+	"github.com/jphalexandrino/CRUD-GO/src/view"
 	"go.uber.org/zap"
 	"net/http"
 )
@@ -16,7 +16,7 @@ var (
 	UserDomainInterface model.UserDomainInterface
 )
 
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller", zap.String("journey", "createUser"))
 	var userRequest request.UserRequest
 
@@ -35,8 +35,7 @@ func CreateUser(c *gin.Context) {
 		userRequest.Age,
 	)
 
-	service := service2.NewUserDomainService()
-	if err := service.CreateUser(domain); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
@@ -45,5 +44,5 @@ func CreateUser(c *gin.Context) {
 
 	fmt.Println(userRequest)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
 }
