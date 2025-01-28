@@ -1,6 +1,7 @@
 # CRUD-GO
 
 This project is a sample Golang application implementing CRUD operations (Create, Read, Update, Delete) using a PostgreSQL database. It demonstrates how to build a RESTful API to manage user entities.
+![Banner](Crud-Go.png)
 
 ## Project Structure
 
